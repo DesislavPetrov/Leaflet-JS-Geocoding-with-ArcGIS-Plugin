@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#map > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-bar.easy-button-container.leaflet-control > button > span > span{
+    margin-top: 8px;
+    width: 19px;
+}
