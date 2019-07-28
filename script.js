@@ -12,7 +12,7 @@ esriWorldImageryMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/s
     attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
   });
 
-var map = L.map('map', { layers: [esriWorldStreetMap] }).setView([42.664602, 23.317155], 4);
+var map = L.map('map', { layers: [esriWorldStreetMap] }).setView([42.664602, 23.317155], 14);
 
 var baseLayers = {
   "ESRI Street": esriWorldStreetMap,
@@ -22,29 +22,6 @@ var baseLayers = {
 };
 
 L.control.layers(baseLayers).addTo(map);
-
-// Reverse geocoding
-var geocodeService = L.esri.Geocoding.geocodeService();
-
-var reverseGeocodeLayerGroup = L.layerGroup().addTo(map);
-
-map.on('click', function (e) {
-  geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
-    reverseGeocodeLayerGroup.addLayer(L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup());
-  });
-});
-
-// Button for deleting reverse geocoding markers
-var controlEasyButton = L.easyButton({
-  states: [{
-    icon: 'glyphicon-remove',
-    title: 'Remove Markers',
-    onClick: function () {
-      // reverseGeocodeLayerGroup.clearLayers();
-      map.removeLayer(reverseGeocodeLayerGroup);
-    }
-  }]
-}).addTo(map);
 
 // Geocoding
 var searchControl = L.esri.Geocoding.geosearch().addTo(map);
